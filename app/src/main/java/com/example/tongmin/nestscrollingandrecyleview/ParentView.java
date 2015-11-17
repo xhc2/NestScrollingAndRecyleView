@@ -66,11 +66,11 @@ public class ParentView extends LinearLayout implements NestedScrollingParent {
         if (dy > 0) {
             //向上滑动
 
-//                    Math.abs(  this.getTop() - dy )
             if ( Math.abs(  this.getTop() - dy ) <= headerHeight) {
                 //header 在向上滑动的过程
                 this.layout(this.getLeft(), this.getTop() - dy, this.getRight(), this.getBottom() - dy);
                 if (!addHeight) {
+                    //只增加一次height
                     addHeight = true;
                     ViewGroup.LayoutParams params = this.getLayoutParams();
                     params.height = headerHeight+this.getHeight();
@@ -78,6 +78,13 @@ public class ParentView extends LinearLayout implements NestedScrollingParent {
                     requestLayout();
                 }
                 consumed[1] += dy;
+            }
+            else{
+                if((this.getTop() + headerHeight) > 0){
+                    int offsetY  = headerHeight + this.getTop();
+                    this.layout(this.getLeft(), this.getTop() - offsetY, this.getRight(), this.getBottom() - offsetY);
+                    consumed[1] += offsetY;
+                }
             }
         }
         if (dy < 0) {
@@ -88,7 +95,13 @@ public class ParentView extends LinearLayout implements NestedScrollingParent {
                 this.layout(this.getLeft(), this.getTop() + Math.abs(dy), this.getRight(), this.getBottom() + Math.abs(dy));
                 consumed[1] += dy;
             }
-
+            else{
+                if(this.getTop() < 0){
+                    int offsetY = Math.abs(this.getTop());
+                    this.layout(this.getLeft(), this.getTop() +offsetY, this.getRight(), this.getBottom() + offsetY);
+                    consumed[1] += offsetY;
+                }
+            }
         }
     }
 
