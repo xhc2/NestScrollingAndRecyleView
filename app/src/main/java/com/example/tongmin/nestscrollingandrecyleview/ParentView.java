@@ -80,7 +80,7 @@ public class ParentView extends LinearLayout implements NestedScrollingParent {
                 consumed[1] += dy;
             }
             else{
-                //当用户滑动动作太大，一次位移太大就会把parentview滑动脱离顶部屏幕
+                //当用户滑动动作太大，一次位移太大就会把parentview滑动脱离底部屏幕
                 if((this.getTop() + headerHeight) > 0){
                     int offsetY  = headerHeight + this.getTop();
                     this.layout(this.getLeft(), this.getTop() - offsetY, this.getRight(), this.getBottom() - offsetY);
