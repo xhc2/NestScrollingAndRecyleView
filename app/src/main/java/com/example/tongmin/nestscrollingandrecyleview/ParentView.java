@@ -70,7 +70,7 @@ public class ParentView extends LinearLayout implements NestedScrollingParent {
                 //header 在向上滑动的过程
                 this.layout(this.getLeft(), this.getTop() - dy, this.getRight(), this.getBottom() - dy);
                 if (!addHeight) {
-                    //只增加一次 高度 height
+                    //只增加一次 高度 height 什么鬼
                     addHeight = true;
                     ViewGroup.LayoutParams params = this.getLayoutParams();
                     params.height = headerHeight+this.getHeight();
